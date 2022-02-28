@@ -34,10 +34,19 @@ dependencies:
   flutter_admin_scaffold: ^1.1.0
   flutter_iconly: ^1.0.2
   date_time_format: ^2.0.1
-
+  firebase_core: ^1.13.0
+  cloud_firestore: ^3.1.9
+  firebase_storage: ^10.2.9
+  file_picker: ^4.4.0
+  flutter_easyloading: ^3.0.3
+  mime_type: ^1.0.0
+  path: ^1.8.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

@@ -1,14 +1,21 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:date_time_format/date_time_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_admin_scaffold/admin_scaffold.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:tryit_admin/screens/Main_Category_screen.dart';
 import 'package:tryit_admin/screens/Sub_Category_screen.dart';
 import 'package:tryit_admin/screens/category_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'screens/DashBoard.dart';
 
-void main() {
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  );
   runApp(const MyApp());
 }
 
@@ -39,6 +46,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.indigo,
       ),
       home: const SideMenu(),
+      builder: EasyLoading.init(),
     );
   }
 }
@@ -99,7 +107,7 @@ class _SideMenuState extends State<SideMenu> {
             icon: IconlyLight.category,
             children: [
               MenuItem(
-                title: 'Category',
+                title: 'Create a Category',
                 route: CategoryScreen.id,
               ),
               MenuItem(
