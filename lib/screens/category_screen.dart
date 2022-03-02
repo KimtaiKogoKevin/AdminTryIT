@@ -115,7 +115,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     borderRadius: BorderRadius.circular(4),
                     border: Border.all(color: Colors.grey.shade800),
                   ),
-                  child:Center(child: image==null ?  Text('Category Image') : Image.memory(image),),
+                  child:Center(child: image==null ?  const Text('Category Image') : Image.memory(image),),
                 ),
                 const SizedBox(
                   height: 10,
@@ -182,7 +182,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             ),
             const SizedBox(height:10,),
-            const Categories_List()
+             CategoriesList(
+              reference: _service.categories,
+            )
 
           ]),
     );

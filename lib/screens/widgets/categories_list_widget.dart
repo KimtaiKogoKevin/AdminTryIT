@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 
 import '../../firebase_services.dart';
 
-class Categories_List extends StatelessWidget {
-  const Categories_List({Key? key}) : super(key: key);
+class CategoriesList extends StatelessWidget {
+  final CollectionReference reference;
+  const CategoriesList({ required this.reference ,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class Categories_List extends StatelessWidget {
               children:[
                 const SizedBox(height: 20,),
                 Image.network(data['image']),
-                Text(data['catName']),
+                Text(reference == _service.categories ? data['catName'] : data['subCatName']),
               ]
           ),
         ),
@@ -29,7 +30,7 @@ class Categories_List extends StatelessWidget {
 
     }
     return StreamBuilder<QuerySnapshot>(
-      stream: _service.categories.snapshots(),
+      stream: reference.snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Text('Something went wrong');
