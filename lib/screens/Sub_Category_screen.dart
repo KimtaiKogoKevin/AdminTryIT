@@ -209,6 +209,7 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
                        const SizedBox(
                          width: 10,
                        ),
+                       if(image!=null)
                        ElevatedButton(
                          onPressed: () {
                            if (_selectedValue == null) {
@@ -236,6 +237,18 @@ class _SubCategoryScreenState extends State<SubCategoryScreen> {
             ],
           ),
           const Divider(color: Colors.grey),
+          const SizedBox(height:10,),
+          Container(
+            alignment: Alignment.topLeft,
+            padding: const EdgeInsets.all(10),
+            child: const Text(
+              'Sub Category List',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+            ),
+          ),
           const SizedBox(height:10,),
            CategoriesList(
              reference: _service.subCategories,

@@ -65,7 +65,8 @@ class _MainCategoriesListState extends State<MainCategoriesList> {
       children: [
         snapshot == null
             ? const Text('Loading...')
-            : Row(children: [
+            :
+        Row(children: [
               _dropDownButton() ,
           const SizedBox(width: 10,),
           ElevatedButton(onPressed: () {
