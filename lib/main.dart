@@ -8,6 +8,7 @@ import 'package:tryit_admin/screens/Main_Category_screen.dart';
 import 'package:tryit_admin/screens/Sub_Category_screen.dart';
 import 'package:tryit_admin/screens/category_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:tryit_admin/screens/vendor_screen.dart';
 
 import 'screens/DashBoard.dart';
 
@@ -32,7 +33,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Admin App',
+      title: 'Try It Admin',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -70,6 +71,11 @@ class _SideMenuState extends State<SideMenu> {
           _selectedScreen = const DashBoard();
         });
         break;
+      case VendorScreen.id:
+        setState(() {
+          _selectedScreen = const VendorScreen();
+        });
+        break;
       case CategoryScreen.id:
         setState(() {
           _selectedScreen = const CategoryScreen();
@@ -101,6 +107,11 @@ class _SideMenuState extends State<SideMenu> {
             title: 'Dashboard',
             route: DashBoard.id,
             icon: Icons.dashboard,
+          ),
+          MenuItem(
+            title: 'Vendors',
+            route: VendorScreen.id,
+            icon: Icons.group_outlined,
           ),
           MenuItem(
             title: 'Categories',
