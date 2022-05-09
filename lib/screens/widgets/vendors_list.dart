@@ -5,14 +5,13 @@ import 'package:tryit_admin/firebase_services.dart';
 
 import '../../models/vendor_model.dart';
 
-class VendorList extends StatefulWidget {
-  const VendorList({Key? key}) : super(key: key);
+class VendorList extends StatelessWidget {
+  final bool?   approvedStatus;
+  const VendorList({Key? key , this.approvedStatus}) : super(key: key);
 
-  @override
-  State<VendorList> createState() => _VendorListState();
-}
 
-class _VendorListState extends State<VendorList> {
+
+
   @override
   Widget build(BuildContext context) {
     FirebaseService _service = FirebaseService();
@@ -33,7 +32,7 @@ class _VendorListState extends State<VendorList> {
     }
 
     return StreamBuilder<QuerySnapshot>(
-      stream: _service.Vendor.snapshots(),
+      stream: _service.Vendor.where('approved',isEqualTo: approvedStatus).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           return const Center(child: Text('Something went wrong'));
@@ -41,6 +40,9 @@ class _VendorListState extends State<VendorList> {
 
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const LinearProgressIndicator();
+        }
+        if(snapshot.data!.size==0){
+          return const Center ( child:Text('No vendors to display',style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold),));
         }
 
         return ListView.builder(
@@ -75,12 +77,12 @@ class _VendorListState extends State<VendorList> {
                                   docName: vendor.uid!,
                                   reference: _service.Vendor).then((value) =>EasyLoading.dismiss());
                             },
-                            child: const Text(
+                            child: const FittedBox(child:Text(
                               'Reject',
                               textAlign: TextAlign.center,
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14),
-                            ))
+                            )))
                         : ElevatedButton(
                             onPressed: () {
                               EasyLoading.show();
@@ -89,7 +91,7 @@ class _VendorListState extends State<VendorList> {
                                   docName: vendor.uid!,
                                   reference: _service.Vendor) .then((value) => EasyLoading.dismiss());
                             },
-                            child: const Text('Accept'))),
+                            child: const FittedBox(child: FittedBox(child: Text('Accept'))))),
                 _vendorData(
                     flex: 1,
                     widget: ElevatedButton(
